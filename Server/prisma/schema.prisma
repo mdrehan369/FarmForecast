@@ -12,3 +12,118 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
+
+enum Role {
+  STAFF
+  ADMIN
+  OFFICER
+}
+
+enum Zone {
+  NORTH
+  SOUTH
+  EAST
+  WEST
+}
+
+enum AddressType {
+  CURRENT
+  PERMANENT
+}
+
+enum PriceDataType {
+  RETAIL // Rs. per kg
+  WHOLESALE // Rs. per quintal
+}
+
+enum Commodities {
+  RICE
+  WHEAT
+  ATTA
+  GRAM_DAL
+  ARHAR_DAL
+  URAD_DAL
+  MOONG_DAL
+  MASOOR_DAL
+  SUGAR
+  MILK
+  GROUNDNUT_OIL
+  MUSTARD_OIL
+  VANASPATI
+  SOYA_OIL
+  SUNFLOWER_OIL
+  PALM_OIL
+  GUR
+  TEA_LOOSE
+  SALT
+  POTATO
+  ONION
+  TOMATO
+}
+
+model User {
+  id          Int        @id @unique @default(autoincrement())
+  type        Role       @default(STAFF)
+  firstName   String
+  lastName    String
+  email       String     @unique
+  phoneNumber String     @unique
+  address_id  Int        @unique
+  joined_at   DateTime   @default(now())
+  address     Address[]
+  documents   Documents?
+}
+
+model Address {
+  id                     Int                   @id @unique @default(autoincrement())
+  type                   AddressType           @default(CURRENT)
+  city                   String
+  state                  String
+  country                String
+  street                 String
+  landmark               String
+  houseNumber            String
+  pinCode                String
+  zone                   Zone                  @default(NORTH)
+  userId                 Int?                  @unique
+  priceReportingCentreId Int?                  @unique
+  user                   User?                 @relation(fields: [userId], references: [id], onDelete: Cascade)
+  priceReportingCentre   PriceReportingCentre? @relation(fields: [priceReportingCentreId], references: [id], onDelete: Cascade)
+}
+
+model Documents {
+  id                     Int                   @id @unique @default(autoincrement())
+  userId                 Int?                  @unique
+  voterIdNumber          String?
+  voterIdPhoto           String?
+  aadharCardNumber       String?
+  aadharCardPhoto        String?
+  panCardNumber          String?
+  panCardPhoto           String?
+  passportNumber         String?
+  passportPhoto          String?
+  drivingLicenceNumber   String?
+  drivingLicencePhoto    String?
+  priceReportingCentreId Int?                  @unique
+  user                   User?                 @relation(fields: [userId], references: [id], onDelete: Cascade)
+  head                   PriceReportingCentre? @relation(fields: [priceReportingCentreId], references: [id], onDelete: Cascade)
+}
+
+model PriceReportingCentre {
+  id            Int         @id @unique @default(autoincrement())
+  headName      String
+  name          String
+  headDocuments Documents?
+  address       Address?
+  priceData     PriceData[]
+}
+
+model PriceData {
+  id                     Int                  @id @unique @default(autoincrement())
+  type                   PriceDataType        @default(RETAIL)
+  price                  Float
+  date                   DateTime             @default(now())
+  commodity              Commodities
+  priceReportingCentreId Int                  @unique
+  priceReportingCentre   PriceReportingCentre @relation(fields: [priceReportingCentreId], references: [id], onDelete: Cascade)
+}
