@@ -9,7 +9,7 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -68,7 +68,7 @@ model User {
   lastName    String
   email       String     @unique
   phoneNumber String     @unique
-  address_id  Int        @unique
+  password    String
   joined_at   DateTime   @default(now())
   address     Address[]
   documents   Documents?
@@ -79,9 +79,9 @@ model Address {
   type                   AddressType           @default(CURRENT)
   city                   String
   state                  String
-  country                String
+  country                String                @default("India")
   street                 String
-  landmark               String
+  landmark               String?
   houseNumber            String
   pinCode                String
   zone                   Zone                  @default(NORTH)
@@ -94,12 +94,12 @@ model Address {
 model Documents {
   id                     Int                   @id @unique @default(autoincrement())
   userId                 Int?                  @unique
-  voterIdNumber          String?
-  voterIdPhoto           String?
-  aadharCardNumber       String?
-  aadharCardPhoto        String?
-  panCardNumber          String?
-  panCardPhoto           String?
+  voterIdNumber          String
+  voterIdPhoto           String
+  aadharCardNumber       String
+  aadharCardPhoto        String
+  panCardNumber          String
+  panCardPhoto           String
   passportNumber         String?
   passportPhoto          String?
   drivingLicenceNumber   String?
