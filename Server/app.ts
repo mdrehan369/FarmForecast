@@ -9,8 +9,8 @@ app.use(express.urlencoded({extended: true}))
 app.use(express.json({limit: '16kb'}))
 app.use(cors())
 
-app.use("/api/v1/admin", adminRouter)
-app.use("/api/v1/staff", staffRouter)
+app.use("/api/v1/admins", adminRouter)
+app.use("/api/v1/staffs", staffRouter)
 
 export {
     app

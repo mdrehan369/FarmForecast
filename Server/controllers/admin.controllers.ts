@@ -13,7 +13,7 @@ type PostData = {
     documents: Documents
 }
 
-const options = {
+export const options = {
     httpOnly: true
 }
 
@@ -158,10 +158,15 @@ const getAllStaffs = asyncHandler(async (req, res) => {
     return res.status(200).json(new ApiResponse(200, staffs, "Fetched Successfully"))
 })
 
+const logout = asyncHandler(async (req, res) => {
+    return res.status(200).clearCookie("accessToken", options).json(new ApiResponse(200, {}, "Logged Out"))
+})
+
 export {
     createAdmin,
     getAdminDetails,
     login,
     registerStaff,
-    getAllStaffs
+    getAllStaffs,
+    logout
 }
