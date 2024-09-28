@@ -11,7 +11,8 @@ const login = asyncHandler(async (req, res) => {
     const { phoneNumber, password } = req.body
     const staff = await prismaClient.user.findUnique({
         where: {
-            phoneNumber
+            phoneNumber,
+            type: "STAFF"
         }
     })
     if (!staff) throw new ApiError(404, "Staff does not exists")

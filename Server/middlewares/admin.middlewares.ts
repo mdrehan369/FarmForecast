@@ -5,7 +5,8 @@ import { IJwtPayload } from "../types/jwt.types"
 import { ApiError } from "../utils/ApiError"
 
 export const adminMiddleware = asyncHandler(async (req, res, next) => {
-    const accessToken = req.cookies.accessToken || req.headers.accessToken
+    
+    const accessToken = req.cookies?.accessToken || req.headers.accessToken
     if (!accessToken) {
         console.log("Not Authorised")
         return res.status(403).json(new ApiResponse(403, "Not Authorized"))

@@ -1,0 +1,243 @@
+{
+	"info": {
+		"_postman_id": "8912c8f0-76bb-40b4-b7a0-0e7fb7d216ea",
+		"name": "FarmForecast",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32976541"
+	},
+	"item": [
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "Create Admin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user\": {\n        \"type\": \"ADMIN\",\n        \"firstName\": \"MD\",\n        \"lastName\": \"Rehan\",\n        \"email\": \"mdrehan9007@gmail.com\",\n        \"password\": \"1234\",\n        \"phoneNumber\": \"6290197361\"\n    },\n    \"address\": {\n        \"city\": \"Kolkata\",\n        \"state\": \"West Bengal\",\n        \"country\": \"India\",\n        \"street\": \"Karaya Road\",\n        \"landmark\": \"Royal Sweets\",\n        \"houseNumber\": \"18\",\n        \"pinCode\": \"700017\",\n        \"zone\": \"NORTH\"\n    },\n    \"documents\": {\n        \"voterIdNumber\": \"<Admin's voterIdNumber>\",\n        \"voterIdPhoto\": \"<Admin's voterIdPhoto>\",\n        \"aadharCardNumber\": \"<Admin's aadharCardNumber>\",\n        \"aadharCardPhoto\": \"<Admin's aadharCardPhoto>\",\n        \"panCardNumber\": \"<Admin's panCardNumber>\",\n        \"panCardPhoto\": \"<Admin's panCardPhoto>\",\n        \"passportNumber\": \"<Admin's passportNumber>\",\n        \"passportPhoto\": \"<Admin's passportPhoto>\",\n        \"drivingLicenceNumber\": \"<Admin's drivingLicenceNumber>\",\n        \"drivingLicencePhoto\": \"<Admin's drivingLicencePhoto>\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Server}}/api/v1/admins/register",
+							"host": [
+								"{{Server}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"admins",
+								"register"
+							]
+						},
+						"description": "### Register Admin\n\nThis endpoint allows the registration of a new admin with the provided user details, address, and documents.\n\n#### Request Body\n\n- `user` (object)\n    \n    - `type` (string)\n        \n    - `firstName` (string)\n        \n    - `lastName` (string)\n        \n    - `email` (string)\n        \n    - `password` (string)\n        \n    - `phoneNumber` (string)\n        \n- `address` (object)\n    \n    - `city` (string)\n        \n    - `state` (string)\n        \n    - `country` (string)\n        \n    - `street` (string)\n        \n    - `landmark` (string)\n        \n    - `houseNumber` (string)\n        \n    - `pinCode` (string)\n        \n    - `zone` (string)\n        \n- `documents` (object)\n    \n    - `voterIdNumber` (string)\n        \n    - `voterIdPhoto` (string)\n        \n    - `aadharCardNumber` (string)\n        \n    - `aadharCardPhoto` (string)\n        \n    - `panCardNumber` (string)\n        \n    - `panCardPhoto` (string)\n        \n    - `passportNumber` (string)\n        \n    - `passportPhoto` (string)\n        \n    - `drivingLicenceNumber` (string)\n        \n    - `drivingLicencePhoto` (string)\n        \n\n#### Response (JSON Schema)\n\n``` json\n{\n    \"type\": \"object\",\n    \"properties\": {\n        \"statusCode\": { \"type\": \"number\" },\n        \"data\": {\n            \"type\": \"object\",\n            \"properties\": {\n                \"id\": { \"type\": \"number\" },\n                \"type\": { \"type\": \"string\" },\n                \"firstName\": { \"type\": \"string\" },\n                \"lastName\": { \"type\": \"string\" },\n                \"email\": { \"type\": \"string\" },\n                \"phoneNumber\": { \"type\": \"string\" },\n                \"password\": { \"type\": \"string\" },\n                \"joined_at\": { \"type\": \"string\" },\n                \"address\": {\n                    \"type\": \"array\",\n                    \"items\": {\n                        \"type\": \"object\",\n                        \"properties\": {\n                            \"id\": { \"type\": \"number\" },\n                            \"type\": { \"type\": \"string\" },\n                            \"city\": { \"type\": \"string\" },\n                            \"state\": { \"type\": \"string\" },\n                            \"country\": { \"type\": \"string\" },\n                            \"street\": { \"type\": \"string\" },\n                            \"landmark\": { \"type\": \"string\" },\n                            \"houseNumber\": { \"type\": \"string\" },\n                            \"pinCode\": { \"type\": \"string\" },\n                            \"zone\": { \"type\": \"string\" },\n                            \"userId\": { \"type\": \"number\" },\n                            \"priceReportingCentreId\": { \"type\": [\"null\", \"number\"] }\n                        }\n                    }\n                },\n                \"documents\": {\n                    \"type\": \"object\",\n                    \"properties\": {\n                        \"id\": { \"type\": \"number\" },\n                        \"userId\": { \"type\": \"number\" },\n                        \"voterIdNumber\": { \"type\": \"string\" },\n                        \"voterIdPhoto\": { \"type\": \"string\" },\n                        \"aadharCardNumber\": { \"type\": \"string\" },\n                        \"aadharCardPhoto\": { \"type\": \"string\" },\n                        \"panCardNumber\": { \"type\": \"string\" },\n                        \"panCardPhoto\": { \"type\": \"string\" },\n                        \"passportNumber\": { \"type\": \"string\" },\n                        \"passportPhoto\": { \"type\": \"string\" },\n                        \"drivingLicenceNumber\": { \"type\": \"string\" },\n                        \"drivingLicencePhoto\": { \"type\": \"string\" },\n                        \"priceReportingCentreId\": { \"type\": [\"null\", \"number\"] }\n                    }\n                }\n            }\n        },\n        \"message\": { \"type\": \"string\" },\n        \"success\": { \"type\": \"boolean\" }\n    }\n}\n\n ```"
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"phoneNumber\": \"6290197361\",\n    \"password\": \"1234\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Server}}/api/v1/admins/login",
+							"host": [
+								"{{Server}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"admins",
+								"login"
+							]
+						},
+						"description": "This endpoint is used to authenticate administrators by logging them into the system. The HTTP POST request is made to {{Server}}/api/v1/admins/login with a raw request body containing the administrator's phone number and password.\n\n### Response\n\nThe response of this request is a JSON schema representing the data structure of the response. This schema can be used to understand the format of the response data that will be received upon successful authentication."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Admin Details",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Server}}/api/v1/admins",
+							"host": [
+								"{{Server}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"admins"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Server}}/api/v1/admins/logout",
+							"host": [
+								"{{Server}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"admins",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register Staff",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user\": {\n        \"type\": \"STAFF\",\n        \"firstName\": \"MD\",\n        \"lastName\": \"Rehan\",\n        \"email\": \"mdrehan1234@gmail.com\",\n        \"password\": \"1234\",\n        \"phoneNumber\": \"9477421012\"\n    },\n    \"address\": {\n        \"city\": \"Kolkata\",\n        \"state\": \"West Bengal\",\n        \"country\": \"India\",\n        \"street\": \"Karaya Road\",\n        \"landmark\": \"Royal Sweets\",\n        \"houseNumber\": \"18\",\n        \"pinCode\": \"700017\",\n        \"zone\": \"NORTH\"\n    },\n    \"documents\": {\n        \"voterIdNumber\": \"<Staff's voterIdNumber>\",\n        \"voterIdPhoto\": \"<Staff's voterIdPhote>\",\n        \"aadharCardNumber\": \"<Staff's aadharCardNumber>\",\n        \"aadharCardPhoto\": \"<Staff's aadharCardPhoto>\",\n        \"panCardNumber\": \"<Staff's panCardNumber>\",\n        \"panCardPhoto\": \"<Staff's panCardPhoto>\",\n        \"passportNumber\": \"<Staff's passportNumber>\",\n        \"passportPhoto\": \"<Staff's passportPhoto>\",\n        \"drivingLicenceNumber\": \"<Staff's drivingLicenceNumber>\",\n        \"drivingLicencePhoto\": \"<Staff's drivingLicencePhoto>\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Server}}/api/v1/admins/staff",
+							"host": [
+								"{{Server}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"admins",
+								"staff"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Staffs",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Server}}/api/v1/admins/staff",
+							"host": [
+								"{{Server}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"admins",
+								"staff"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Admin's APIs"
+		},
+		{
+			"name": "Staff",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"phoneNumber\": \"9477421002\",\n    \"password\": \"1234\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Server}}/api/v1/staffs",
+							"host": [
+								"{{Server}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"staffs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Current Staff Details",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Server}}/api/v1/staffs",
+							"host": [
+								"{{Server}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"staffs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Server}}/api/v1/staffs/logout",
+							"host": [
+								"{{Server}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"staffs",
+								"logout"
+							]
+						},
+						"description": "### Logout Staff\n\nThis endpoint triggers the logout action for staff members.\n\n#### Request Body\n\nThis request does not require a request body.\n\n#### Response\n\n- `statusCode` (number): The status code of the response.\n    \n- `data` (object): The data returned in the response.\n    \n- `message` (string): Any additional message included in the response.\n    \n- `success` (boolean): Indicates the success status of the operation.\n    \n\nExample Response:\n\n``` c\n{\n    \"statusCode\": 0,\n    \"data\": {},\n    \"message\": \"\",\n    \"success\": true\n}\n\n ```"
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "Server",
+			"value": "https://localhost:3000"
+		}
+	]
+}

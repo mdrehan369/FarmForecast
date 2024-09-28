@@ -34,7 +34,7 @@ const createAdmin = asyncHandler(async (req, res) => {
             ]
         }
     })
-    if (!prevAdmin) throw new ApiError(400, "Admin already exists")
+    if (prevAdmin) throw new ApiError(400, "Admin already exists")
 
     const docs = await prismaClient.documents.findFirst({
         where: {
@@ -45,7 +45,7 @@ const createAdmin = asyncHandler(async (req, res) => {
             ]
         }
     })
-    if (!docs) throw new ApiError(400, "Admin already exists with the given documents")
+    if (docs) throw new ApiError(400, "Admin already exists with the given documents")
 
     user.password = hashPassword(user.password)
 
@@ -66,8 +66,10 @@ const createAdmin = asyncHandler(async (req, res) => {
         }
     })
 
+    const accessToken = generateAccessToken(admin, "ADMIN")
+
     if (!admin) throw new ApiError(500, "Error While creating the admin")
-    return res.status(201).json(new ApiResponse(201, admin, "Created Successfully!"))
+    return res.status(201).cookie("accessToken", accessToken, options).json(new ApiResponse(201, admin, "Created Successfully!"))
 })
 
 const getAdminDetails = asyncHandler(async (req, res) => {
@@ -78,6 +80,9 @@ const getAdminDetails = asyncHandler(async (req, res) => {
             id: id
         }
     })
+
+    if(!admin) return res.status(404).json(new ApiResponse(200, {}, "Admin not found"))
+    else admin.password = ""
 
     return res.status(200).json(new ApiResponse(200, admin, "Fetched Successfully"))
 })
@@ -110,7 +115,7 @@ const registerStaff = asyncHandler(async (req, res) => {
         }
     })
 
-    if (!prevStaff) throw new ApiError(400, "Staff already exists with the given credentials")
+    if (prevStaff) throw new ApiError(400, "Staff already exists with the given credentials")
 
     const docs = await prismaClient.documents.findFirst({
         where: {
@@ -121,7 +126,7 @@ const registerStaff = asyncHandler(async (req, res) => {
             ]
         }
     })
-    if (!docs) throw new ApiError(400, "Staff already exists with the given documents")
+    if (docs) throw new ApiError(400, "Staff already exists with the given documents")
 
     user.password = hashPassword(user.password)
 

@@ -4,12 +4,12 @@ import { createAdmin, getAdminDetails, getAllStaffs, login, logout, registerStaf
 
 const router = express.Router()
 
-router.route("/").post(createAdmin)
-router.route("/").get(login)
+router.route("/register").post(createAdmin)
+router.route("/login").post(login)
 
 // Protected Routes
 
-router.route("/admin").get(adminMiddleware, getAdminDetails)
+router.route("/").get(adminMiddleware, getAdminDetails)
 router.route("/staff").post(adminMiddleware, registerStaff)
 router.route("/staff").get(adminMiddleware, getAllStaffs)
 router.route("/logout").get(adminMiddleware, logout)
