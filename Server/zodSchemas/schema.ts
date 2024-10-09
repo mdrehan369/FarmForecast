@@ -26,7 +26,7 @@ export const documentSchema = z.object({
     drivingLicenceNumber:   z.string().optional(),
     drivingLicencePhoto:    z.string().optional(),
 })
-
+// sfbgbrssr
 export const userSchema = z.object({
     type: z.enum(["STAFF", "ADMIN"]).default("STAFF"),
     firstName: z.string({required_error: "First name is required"}).max(50),
