@@ -8,10 +8,6 @@ generator client {
   provider = "prisma-client-js"
 }
 
-generator zod {
-  provider = "prisma-zod-generator"
-}
-
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
@@ -66,16 +62,17 @@ enum Commodities {
 }
 
 model User {
-  id          Int        @id @unique @default(autoincrement())
-  type        Role       @default(STAFF)
+  id          Int         @id @unique @default(autoincrement())
+  type        Role        @default(STAFF)
   firstName   String
   lastName    String
-  email       String     @unique
-  phoneNumber String     @unique
+  email       String      @unique
+  phoneNumber String      @unique
   password    String
-  joined_at   DateTime   @default(now())
+  joined_at   DateTime    @default(now())
   address     Address[]
   documents   Documents?
+  PriceData   PriceData[]
 }
 
 model Address {
@@ -89,7 +86,7 @@ model Address {
   houseNumber            String
   pinCode                String
   zone                   Zone                  @default(NORTH)
-  userId                 Int?                  @unique
+  userId                 Int?
   priceReportingCentreId Int?                  @unique
   user                   User?                 @relation(fields: [userId], references: [id], onDelete: Cascade)
   priceReportingCentre   PriceReportingCentre? @relation(fields: [priceReportingCentreId], references: [id], onDelete: Cascade)
@@ -128,6 +125,8 @@ model PriceData {
   price                  Float
   date                   DateTime             @default(now())
   commodity              Commodities
-  priceReportingCentreId Int                  @unique
+  priceReportingCentreId Int                  
   priceReportingCentre   PriceReportingCentre @relation(fields: [priceReportingCentreId], references: [id], onDelete: Cascade)
+  staffId                Int
+  staff                  User?                @relation(fields: [staffId], references: [id], onDelete: Cascade)
 }

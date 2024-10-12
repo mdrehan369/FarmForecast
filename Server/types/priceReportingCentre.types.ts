@@ -1,8 +1,8 @@
-import { Prisma } from "@prisma/client";
+import { Prisma } from '@prisma/client'
 
 export type FullPriceReportingCentre = Prisma.PriceReportingCentreGetPayload<{
     include: {
-        headDocuments: true,
+        headDocuments: true
         address: true
     }
 }>

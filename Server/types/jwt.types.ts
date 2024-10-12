@@ -1,7 +1,7 @@
 export enum Role {
-    ADMIN="ADMIN",
-    STAFF="STAFF",
-    OFFICER="OFFICER"
+    ADMIN = 'ADMIN',
+    STAFF = 'STAFF',
+    OFFICER = 'OFFICER',
 }
 
 export interface IJwtPayload {
